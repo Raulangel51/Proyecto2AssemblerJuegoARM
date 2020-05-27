@@ -23,6 +23,7 @@ ciclo:		bl myrand
 		#bl printf
 		subs cont, cont, #1
 		bne ciclo
+
 .unreq	cont
 	mov r7,#1
 	swi 0
