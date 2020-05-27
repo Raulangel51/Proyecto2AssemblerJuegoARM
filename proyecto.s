@@ -31,6 +31,9 @@ main:
 	cmp r5, #1
 	beq empezar
 	bne salir
+	
+	mov r6,#6				@contador para los 6 turnos
+	mov r7, #1				@es el que nos dice que jugador le toca, 1 jugador uno y 2 jugador 2\n
 
 
 empezar:
@@ -38,15 +41,58 @@ empezar:
 	ldr r0, =string
 	bl printf
 	
+	#bl mysrand
+	#mov r3,#2				
+	repite:	
+		mov r0,sp
+		bl mysrand
+		
+		
 	#ciclo para el juego
-	juego:
+	juego:	bl myrand
+		push {r0}
+		mov r1,r0
+		and r1,r1,#9 @para que genere numeros entre 0 y 9
+		mov r4,r1
+		ldr r0,=int
+		bl printf
+		pop {r0}
+
+		#empieza comparar el random para ver a que opcion mandarlo
+		cmp r4, #0
+		beq primeraOpcion
+		
+		cmp r4, #1
+		beq segundaOpcion
+		
+		cmp r4, #2
+		beq terceraOpcion
+		
+		cmp r4, #3
+		beq cuartaOpcion
+		
+		cmp r4, #4
+		beq quintaOpcion
+		
+		cmp r4, #5
+		beq sextaOpcion
+		
+		cmp r4, #6
+		beq septimaOpcion
+		
+		cmp r4, #7
+		beq octavaOpcion
+		
+		cmp r4, #8
+		beq novenaOpcion
+		
+		cmp r4, #9
+		beq decimaOpcion
+		
+		
+		
+		
 	
-	#codido del random
-	#
-	#
-	#
-	#
-	/*
 	primeraOpcion:
 	#M Muestra las 3 imagenes
 		ldr r1, =primeraPalabra
@@ -247,7 +293,8 @@ empezar:
 		cmp r6, r5
 		beq correcto
 		bne incorrecto
-	*/
+	
+	
 	decimaOpcion:
 		#M Muestra las 3 imagenes
 		ldr r1, =decimaPalabra
@@ -273,12 +320,89 @@ empezar:
 		ldr r0, =string
 		bl printf
 		
+		#compara r7 para ver a quien ponerle los puntos
+		cmp r7, #1
+		bne primerJugador
+		beq segundoJugador
+		
 #Revisa si la palabra que inregio es incorrecta
 	incorrecto:
 		ldr r1, =incorrectov
 		ldr r0, =string
 		bl printf
+		
+		#Cambia el turno del jugador
+		cmp r7, #1
+		beq malUno
+		bne malDos
+		
+		#repetir el ciclo 6 veces
+		#sub r6, r6, #1
+		#cmp r6, #0
+		#bne juego
+		#beq salir
+	malUno:
+		mov r7, #2
+		sub r6, r6, #1
+		cmp r6, #0
+		bne juego
+		beq salir
+	malDos:
+		mov r7, #1
+		sub r6, r6, #1
+		cmp r6, #0
+		bne juego
+		beq salir
+			
+	primerJugador:
+	#agrega los 3 puntos
+		ldr r5, =jugador1
+		ldr r5, [r5]
+		add r5, r5, #3
+		
+		#guarda los 3 puntos
+		ldr r4, =jugador1
+		str r5, [r4]
+		
+		#muestra quien gano los tres puntos
+		ldr r1, =turno1
+		ldr r0, =string
+		bl printf
+		
+		#Cambia el turno del jugador
+		mov r7, #1
+		
+		#repetir el ciclo 6 veces
+		sub r6, r6, #1
+		cmp r6, #0
+		bne juego
+		beq salir
 	
+	segundoJugador:
+		#agrega los 3 puntos
+		ldr r5, =jugador2
+		ldr r5, [r5]
+		add r5, r5, #3
+		
+		#guarda los 3 puntos
+		ldr r4, =jugador2
+		str r5, [r4]
+		
+		#muestra quien gano los tres puntos
+		ldr r1, =turno2
+		ldr r0, =string
+		bl printf
+		
+		#Cambia el turno del jugador
+		mov r7, #2
+		
+		#repetir el ciclo 6 veces
+		sub r6, r6, #1
+		cmp r6, #0
+		bne juego
+		beq salir
+	
+		
 	
 salir:
 	ldr r1, =salidav
@@ -294,6 +418,9 @@ salir:
 # variables
 .data
 .align 2
+
+turno1:						.asciz "\nEl jugador uno gano 3 puntos\n"
+turno2:						.asciz "\nEl jugador dos gano 3 puntos\n"
 
 correctov:					.asciz "Excelente has ganado 3 puntos.\n"
 incorrectov:				.asciz "Que mal es incorrecto.\n"
@@ -338,3 +465,10 @@ respuestaNovenaPalabra:		.asciz "DOLLS"
 
 decimaPalabra:				.asciz "Imagen 1\timagen 2\timagen 3\n|\\---/|   \t   /\\_/\\ \t     /\\_/\\     \n| o_o |  \t ( o.o ) \t    ( o o )    \n \\_^_/  \t  > ^ < \t    ==_Y_==  \n           \t            \t      `-'       \n\t\tTOGA\n"
 respuestaDecimaPalabra: 	.asciz "GATO"
+
+
+jugador1:					.word 0
+jugador2:					.word 0
+
+
+

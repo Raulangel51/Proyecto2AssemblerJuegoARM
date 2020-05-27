@@ -10,7 +10,7 @@ cont:		.word 0
 numeros:	.word 0,0,0,0,0,0
 
 .text
-.global myrand, mysrand, anadir, validar, correcto, incorrecto
+.global myrand, mysrand, anadir, validar
 
 myrand:
 	ldr r1, =seed	@puntero a semilla
@@ -71,17 +71,7 @@ validar:
 		add r7,r7,r11
 		str r6, [r7]
 		mov pc, lr
-
-
-correcto:
-		ldr r1, =correctov
-		ldr r0, =string
-		bl printf
-
-incorrecto:
-		ldr r1, =incorrectov
-		ldr r0, =string
-		bl printf		
+	
 	
 
 	

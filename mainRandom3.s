@@ -17,10 +17,10 @@ ciclo:		bl myrand
 		ldr r0,=formato
 		bl printf
 		# mov r1, r0
-		bl validar
-		mov r1, r2
-		ldr r0, =formato
-		bl printf
+		#bl validar
+		#mov r1, r2
+		#ldr r0, =formato
+		#bl printf
 		subs cont, cont, #1
 		bne ciclo
 .unreq	cont
