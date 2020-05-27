@@ -32,7 +32,7 @@ main:
 	beq empezar
 	bne salir
 	
-	mov r6,#6				@contador para los 6 turnos
+	mov r10,#6				@contador para los 6 turnos
 	mov r7, #1				@es el que nos dice que jugador le toca, 1 jugador uno y 2 jugador 2\n
 
 
@@ -47,7 +47,7 @@ empezar:
 		mov r0,sp
 		bl mysrand
 		
-		
+	mov r10, #6
 	#ciclo para el juego
 	juego:	bl myrand
 		push {r0}
@@ -342,15 +342,21 @@ empezar:
 		#bne juego
 		#beq salir
 	malUno:
+		mov r1, r10
+		ldr r0, =int
+		bl printf
 		mov r7, #2
-		sub r6, r6, #1
-		cmp r6, #0
+		sub r10, r10, #1
+		cmp r10, #0
 		bne juego
 		beq salir
 	malDos:
+		mov r1, r10
+		ldr r0, =int
+		bl printf
 		mov r7, #1
-		sub r6, r6, #1
-		cmp r6, #0
+		sub r10, r10, #1
+		cmp r10, #0
 		bne juego
 		beq salir
 			
@@ -372,9 +378,12 @@ empezar:
 		#Cambia el turno del jugador
 		mov r7, #1
 		
+		mov r1, r10
+		ldr r0, =int
+		bl printf
 		#repetir el ciclo 6 veces
-		sub r6, r6, #1
-		cmp r6, #0
+		sub r10, r10, #1
+		cmp r10, #0
 		bne juego
 		beq salir
 	
@@ -396,9 +405,12 @@ empezar:
 		#Cambia el turno del jugador
 		mov r7, #2
 		
+		mov r1, r10
+		ldr r0, =int
+		bl printf
 		#repetir el ciclo 6 veces
-		sub r6, r6, #1
-		cmp r6, #0
+		sub r10, r10, #1
+		cmp r10, #0
 		bne juego
 		beq salir
 	
