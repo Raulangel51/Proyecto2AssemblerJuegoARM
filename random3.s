@@ -42,35 +42,6 @@ anadir:
 	bl printf
 	mov pc, lr
 	
-validar:
-	mov r10,#0 @contador posicion
-	mov r11,#0 @contador del ciclo
-	mov r12,#0 @para colocar el numer oen el vector al final
-	# mov r13,#0 @donde va a estar el numero si es valido
-	mov r2,#0 @boolean para saber si es valido, 1 si es valido 0 no es valido y manda a buscar otro
-	revision:
-		ldr r6, =numeros
-		add r6,r6,r11
-		ldr r6, [r6]
-		cmp r6, r1
-		beq igual
-		bne noigual
-	igual:
-		mov r2, #1
-		mov r10, r11
-	noigual:
-		cmp r6, #0
-		bne seguir
-		beq agregar
-		seguir:
-			add r11, r11, #4
-			cmp r11, #28
-			bne revision
-	agregar:
-		ldr r7, =numeros
-		add r7,r7,r11
-		str r6, [r7]
-		mov pc, lr
 	
 	
 
