@@ -417,6 +417,25 @@ empezar:
 		
 	
 salir:
+	ldr r1,=final
+	ldr r0, =string
+	bl printf
+	
+	#Muestra los puntos totales
+	ldr r1, =jugador1
+	LDR r1, [r1]
+	ldr r0, =final1
+	bl printf
+
+	ldr r1, =jugador2
+	LDR r1, [r1]
+	ldr r0, =final2
+	bl printf
+	
+	ldr r1, =felicidades
+	ldr r0, =string
+	bl printf
+	
 	ldr r1, =salidav
 	ldr r0, =string
 	bl printf
@@ -430,6 +449,11 @@ salir:
 # variables
 .data
 .align 2
+
+final:						.asciz "\nLos puntajes finales son: \n"
+final1:						.asciz "El jugador uno tiene un total de: %d\n"
+final2: 					.asciz "El jugador dos tiene un total de: %d\n"
+felicidades:				.asciz "Muchas felicidades ganador.\n"
 
 turno1:						.asciz "\nEl jugador uno gano 3 puntos\n"
 turno2:						.asciz "\nEl jugador dos gano 3 puntos\n"
