@@ -13,6 +13,7 @@ const2:		.word	12345
 formato: .asciz "%d\n"
 cont:		.word 0
 numeros:	.word 0,0,0,0,0,0
+dondeQuede:	.word 0
 
 .text
 .global myrand, mysrand, anadir, validar
@@ -24,10 +25,13 @@ myrand:
 	ldr r2, [r1,#4]	@leer const1
 	mul r3, r0, r2	@r3=seed*1103515245
 	ldr r0, [r1,#8]	@leer const2
+	mov r12, #0
 	add r0, r0, r3	@r0=r3+12345
 	str r0, [r1]	@guardo en variable seed
 	lsl r0, #1	@devuelve seed>>16&0x7FFF
 	lsr r0, #17
+	cmp r12, #2
+	beq validar
 	mov pc, lr
 
 # Alejandra Gudiel
@@ -37,19 +41,7 @@ mysrand:
 	mov pc, lr
 
 
-# Raul Jimenez 
-anadir:
-	and r1,r1,#9
-	ldr r9, =cont
-	ldr r10, =numeros
-	ldr r9, [r9]
-	add r10, r9
-	str r1, [r10]
-	add r9, #4
-	ldr r0, =formato
-	bl printf
-	mov pc, lr
-
+#Donaldo Garcia
 validar:
 	mov r9,#0 @contador posicion
 	mov r11,#0 @contador del ciclo
@@ -78,10 +70,8 @@ igual:
 	mov r1, #0
 	mov r11, #0
 	b myrand
+#Raul Jimenez
 agregar:
-	ldr r0,	=prueba
-	bl printf
-
 	str r1,[r6],r9 
 	add r9, r9, #4
 	ldr r8,=dondeQuede
