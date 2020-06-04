@@ -34,6 +34,9 @@ main:
 	
 	mov r10,#6				@contador para los 6 turnos
 	mov r7, #1				@es el que nos dice que jugador le toca, 1 jugador uno y 2 jugador 2\n
+	mov r8, #0                              @limpia r8 para ir manejando el valor del and para generar numeros random de 0 a 9
+
+
 
 
 empezar:
@@ -49,10 +52,13 @@ empezar:
 		
 	mov r10, #6
 	#ciclo para el juego
-	juego:	bl myrand
+	juego:	
+		mov r8, r10
+		add r8, r8, #3 
+		bl myrand
 		push {r0}
 		mov r1,r0
-		and r1,r1,#9 @para que genere numeros entre 0 y 9
+		and r1,r1,r8 @para que genere numeros entre 0 y 9
 		mov r4,r1
 		ldr r0,=int
 		bl printf
