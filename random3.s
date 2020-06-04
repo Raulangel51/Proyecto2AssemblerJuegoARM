@@ -41,37 +41,51 @@ anadir:
 	ldr r0, =formato
 	bl printf
 	mov pc, lr
-	
+
 validar:
-	mov r10,#0 @contador posicion
+	mov r9,#0 @contador posicion
 	mov r11,#0 @contador del ciclo
 	mov r12,#0 @para colocar el numer oen el vector al final
-	# mov r13,#0 @donde va a estar el numero si es valido
 	mov r2,#0 @boolean para saber si es valido, 1 si es valido 0 no es valido y manda a buscar otro
-	revision:
-		ldr r6, =numeros
-		add r6,r6,r11
-		ldr r6, [r6]
-		cmp r6, r1
-		beq igual
-		bne noigual
-	igual:
-		mov r2, #1
-		mov r10, r11
-	noigual:
-		cmp r6, #0
-		bne seguir
-		beq agregar
-		seguir:
-			add r11, r11, #4
-			cmp r11, #28
-			bne revision
-	agregar:
-		ldr r7, =numeros
-		add r7,r7,r11
-		str r6, [r7]
-		mov pc, lr
+	mov r3,#0
+	ldr r1,=seed
+	ldr r1,[r1]
+	and r1,r1,#9 @para que genere numeros entre 0 y 9
+	ldr r6, =numeros
+	ldr r9,=dondeQuede
+	ldr r9,[r9]
+	ldr r0,	=formato
+	bl printf
+
+revisar:
+	ldr r2,[r6],#4		
+	add r11,r11,#1
+	cmp r2, r1
+	beq igual
+	cmp r11,#10
+	bne revisar
+	b agregar 
+igual:
+	mov r2, #0
+	mov r1, #0
+	mov r11, #0
+	b myrand
+agregar:
+	ldr r0,	=prueba
+	bl printf
+
+	str r1,[r6],r9 
+	add r9, r9, #4
+	ldr r8,=dondeQuede
+	str r9, [r8]
+
+	mov r0, r1
+	ldr r2,	=formato
+	bl printf
 	
+	mov pc, lr
+
+		
 	
 
 	
