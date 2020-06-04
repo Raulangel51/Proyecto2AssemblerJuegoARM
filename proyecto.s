@@ -1,7 +1,7 @@
 /* Pryecto asembler
 Raul Jimenez 19017
 Donaldo Garcia 19683
-Alejandra Gudiel
+Alejandra Gudiel 19232
 Juego que consta en adivinar la palabra relacionada a dos imagenes
 */
 .text
@@ -60,8 +60,8 @@ empezar:
 		mov r1,r0
 		and r1,r1,r8 @para que genere numeros entre 0 y 9
 		mov r4,r1
-		ldr r0,=int
-		bl printf
+		# ldr r0,=int
+		# bl printf
 		pop {r0}
 
 		#empieza comparar el random para ver a que opcion mandarlo
@@ -349,8 +349,8 @@ empezar:
 		#beq salir
 	malUno:
 		mov r1, r10
-		ldr r0, =int
-		bl printf
+		# ldr r0, =int
+		# bl printf
 		mov r7, #2
 		sub r10, r10, #1
 		cmp r10, #0
@@ -358,8 +358,8 @@ empezar:
 		beq salir
 	malDos:
 		mov r1, r10
-		ldr r0, =int
-		bl printf
+		# ldr r0, =int
+		# bl printf
 		mov r7, #1
 		sub r10, r10, #1
 		cmp r10, #0
@@ -385,8 +385,8 @@ empezar:
 		mov r7, #1
 		
 		mov r1, r10
-		ldr r0, =int
-		bl printf
+		# ldr r0, =int
+		# bl printf
 		#repetir el ciclo 6 veces
 		sub r10, r10, #1
 		cmp r10, #0
@@ -412,8 +412,8 @@ empezar:
 		mov r7, #2
 		
 		mov r1, r10
-		ldr r0, =int
-		bl printf
+		# ldr r0, =int
+		# bl printf
 		#repetir el ciclo 6 veces
 		sub r10, r10, #1
 		cmp r10, #0
@@ -475,37 +475,37 @@ string: 					.asciz "%s"
 bienvenida:					.asciz "====================Bienvenidos al Juego====================\n1.Iniciar juego\n2.salir\n\t¿Que desea hacer?\n"
 opcion:						.word 0
 
-primeraPalabra:				.asciz "\tImagen 1\t\t imagen 2\t\timagen 3\n\t  __\n \t(@_ \t\t\t    (___()'`;	\t /\\_/\\ \n \t///_//\t\t\t   /,    /`	\t( o.o )\n \t<____)	\t\t     //’’--//	\t> ^ <\n\n \t\tMILANESA\n"
+primeraPalabra:				.asciz "\tImagen 1\t\t imagen 2\t\timagen 3\n\t  __\n \t(@_ \t\t\t    (___()'`;	\t /\\_/\\ \n \t///_//\t\t\t   /,    /`	\t( o.o )\n \t<____)	\t\t     //’’--//	\t> ^ <\n\n \t\tM-I-L-A-N-E-S-A\n"
 respuestaPrimerPalabra:		.asciz "ANIMALES"
 
-segundaPalabra:				.asciz "\tImagen 1\t\t imagen 2\timagen 3\n  ,--./,-.   \t  // ‘’’’--.._         \t         _/-\_   \n / #      \  \t ||  (_)  _ ‘’-._   \t      .-`-:-:-`-. \n|          |  \t ||    _ (_)    '-. \t     /-:-:-:-:-:-\ \n \        /   \t ||   (_)   __..-' \t     \:-:-:-:-:-:/ \n  `._,._,'  \t  \\__..--‘’’’       \t      |`       `|   \n\t\tCADMIO\n"
+segundaPalabra:				.asciz "\tImagen 1\t\t imagen 2\timagen 3\n  ,--./,-.   \t  // ‘’’’--.._         \t         _/-\_   \n / #      \  \t ||  (_)  _ ‘’-._   \t      .-`-:-:-`-. \n|          |  \t ||    _ (_)    '-. \t     /-:-:-:-:-:-\ \n \        /   \t ||   (_)   __..-' \t     \:-:-:-:-:-:/ \n  `._,._,'  \t  \\__..--‘’’’       \t      |`       `|   \n\t\tC-A-D-M-I-O\n"
 respuestaSegundaPalabra:	.asciz "COMIDA"
 
 terceraPalabra:				.asciz "\tImagen 1\t\t imagen 2\n  .-''''-.     \t     .-'  |         \n /,..___\       \t    /   <\|        \n() {_____}    \t   /     \'         \n  (/-@-@-\) \t   |_.- o-o      \n  {`-=^=-'}   \t   / C  -._)\     \n  {  `-'  }  \t  /',        |       \n   {     }   \t |   `-,_,__,'    \n    `---'   \t (,,)====[_]=|\n"
-terceraPalabra2:			.asciz "Imagen 3\n__     _  __                                  \n| \__ `\O/  `--  {}    \}    {/              \n\    \_(~)/______/=____/=____/=* \n \=======/    //\\  >\/> || \>         \n----`---`---  `` `` ```` `` ``              \n\t\tVANIDAD\n"
+terceraPalabra2:			.asciz "Imagen 3\n__     _  __                                  \n| \__ `\O/  `--  {}    \}    {/              \n\    \_(~)/______/=____/=____/=* \n \=======/    //\\  >\/> || \>         \n----`---`---  `` `` ```` `` ``              \n\t\tV-A-N-I-D-A-D\n"
 respuestaTerceraPalabra:	.asciz "NAVIDAD"
 
-cuartaPalabra: 				.asciz "\tImagen 1\t\t imagen 2\timagen 3\n  /| |\      \t     |   |   \t      |   |     \n ( \./ )   \t    ( \ / )   \t      (.\ /.)    \n  \ : /    \t    \\*//    \t     \   /      \n  ) : (    \t    ))*((   \t      ) . (    \n /  :  \   \t    ///|\\\   \t    /  v  |   \n |__:__| \t  ////|\\\\  \t   /.......|   \n\t\tDESVISTOS\n"
+cuartaPalabra: 				.asciz "\tImagen 1\t\t imagen 2\timagen 3\n  /| |\      \t     |   |   \t      |   |     \n ( \./ )   \t    ( \ / )   \t      (.\ /.)    \n  \ : /    \t    \\*//    \t     \   /      \n  ) : (    \t    ))*((   \t      ) . (    \n /  :  \   \t    ///|\\\   \t    /  v  |   \n |__:__| \t  ////|\\\\  \t   /.......|   \n\t\tD-E-S-V-I-S-T-O-S\n"
 respuestaCuartaPalabra:		.asciz "VESTIDOS"
 
 quintaPalabra:				.asciz "\tImagen 1\t\t imagen 2\n               \t         ________     _______\n /|     /|      \t   . - ~|        |-^-|        |~ - . \n  | _____|\t {      |          |   |         |      }\n   (_)-(_)  \t         `.____.'     `.____.'    \n"
-quintaPalabra2:				.asciz "\timagen 3\n        _,--,            _      \n   __,-'____| ___      /' |\n /'   `\,--,/'   `\  /'   |       \n(       )  (       )'            \n \_   _/'  `\_   _/            \n   '''        '''               \n\t\tNELSET\n"
+quintaPalabra2:				.asciz "\timagen 3\n        _,--,            _      \n   __,-'____| ___      /' |\n /'   `\,--,/'   `\  /'   |       \n(       )  (       )'            \n \_   _/'  `\_   _/            \n   '''        '''               \n\t\tN-E-L-S-E-T\n"
 respuestaQuintaPalabra:		.asciz "LENTES"
 
-sextaPalabra:				.asciz "\tImagen 1\t\t imagen 2\timagen 3\n   ___ ___\t    __   __    \t     __   __   \n /| |/|\| |\   \t  /| |/|\| |\     \t    /  `-'  |      \n/_| ´ |.` |_|\t /_|  o.o  |_|\t   / | R   | |    \n  |   |.  |    \t   | o`o´o |   \t  / /|  E  || |  \n  |   |.  |    \t   |  o^o  |   \t /_/ |   M | |_|\n  |___|.__|\t   |_______|\t     |_____|    \n\t\tMASCAIS\n"
+sextaPalabra:				.asciz "\tImagen 1\t\t imagen 2\timagen 3\n   ___ ___\t    __   __    \t     __   __   \n /| |/|\| |\   \t  /| |/|\| |\     \t    /  `-'  |      \n/_| ´ |.` |_|\t /_|  o.o  |_|\t   / | R   | |    \n  |   |.  |    \t   | o`o´o |   \t  / /|  E  || |  \n  |   |.  |    \t   |  o^o  |   \t /_/ |   M | |_|\n  |___|.__|\t   |_______|\t     |_____|    \n\t\tM-A-S-C-A-I-S\n"
 respuestaSextaPalabra:		.asciz "CAMISAS"
 
 septimaPalabra:				.asciz "\tImagen 1\t\t imagen 2\n  ______     \t   _/\______\\__\n /|_||_\`.__  \t / ,-. -|-  ,-.`-.     \n(   _    _ _\  \t `( o )----( o )-'  \n=`-(_)--(_)-' \t    `-'      `-'       \n"
-septimaPalabra2:			.asciz "Imagen 3\n     ______             \n         //  ||\ \              \n _____//___||_\ \___     \n )  _          _    \            \n |_/ \________/ \___|    \n___\_/________\_/____\n\t\tCORAR\n"
+septimaPalabra2:			.asciz "Imagen 3\n     ______             \n         //  ||\ \              \n _____//___||_\ \___     \n )  _          _    \            \n |_/ \________/ \___|    \n___\_/________\_/____\n\t\tC-O-R-A-R\n"
 respuestaSeptimaPalabra:	.asciz "CARRO"
 
-octavaPalabra:				.asciz "Imagen 1\timagen 2\timagen 3\n     ()=() \t  ()-()  \t ()=()   \t ()-()     \n     ('Y') \t    (':')  \t (^;^)   \t  ('&')    \n     q . p \t  d . b \t  C   C\t   c . c   \n     ()_() \t  ()_()  \t ()_()   \t  ()=()   \n\t\tMO.ROS\n"
+octavaPalabra:				.asciz "Imagen 1\timagen 2\timagen 3\n     ()=() \t  ()-()  \t ()=()   \t ()-()     \n     ('Y') \t    (':')  \t (^;^)   \t  ('&')    \n     q . p \t  d . b \t  C   C\t   c . c   \n     ()_() \t  ()_()  \t ()_()   \t  ()=()   \n\t\tM-O-.-R-O-S\n"
 respuestaOctavaPalabra:		.asciz "MR.OSO"
 
-novenaPalabra:				.asciz "Imagen 1\timagen 2\timagen 3\n    __( )_  \t  _( )__( )_  \t  _( )__( )__ \n   '--. .--. \t  .--. .--. .- \t  -. .--'         \n     / _ \  \t / _ \/ _ \     \t / _ \/ _ \       \n     (/ \) \t (/ \)(/ \)     \t (/ \)(/ \)          \n\t\tLODLS\n"
+novenaPalabra:				.asciz "Imagen 1\timagen 2\timagen 3\n    __( )_  \t  _( )__( )_  \t  _( )__( )__ \n   '--. .--. \t  .--. .--. .- \t  -. .--'         \n     / _ \  \t / _ \/ _ \     \t / _ \/ _ \       \n     (/ \) \t (/ \)(/ \)     \t (/ \)(/ \)          \n\t\tL-O-D-L-S\n"
 respuestaNovenaPalabra:		.asciz "DOLLS"
 
-decimaPalabra:				.asciz "Imagen 1\timagen 2\timagen 3\n|\\---/|   \t   /\\_/\\ \t     /\\_/\\     \n| o_o |  \t ( o.o ) \t    ( o o )    \n \\_^_/  \t  > ^ < \t    ==_Y_==  \n           \t            \t      `-'       \n\t\tTOGA\n"
+decimaPalabra:				.asciz "Imagen 1\timagen 2\timagen 3\n|\\---/|   \t   /\\_/\\ \t     /\\_/\\     \n| o_o |  \t ( o.o ) \t    ( o o )    \n \\_^_/  \t  > ^ < \t    ==_Y_==  \n           \t            \t      `-'       \n\t\tT-O-G-A\n"
 respuestaDecimaPalabra: 	.asciz "GATO"
 
 

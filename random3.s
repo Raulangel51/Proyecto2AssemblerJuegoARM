@@ -1,5 +1,10 @@
 /* Villena, A. & Asenjo, R. & Corbera, F.
 Practicas basadas en Raspberry Pi */
+/* Raul Jimenez 19017
+Donaldo Garcia 19683
+Alejandra Gudiel 19232
+programa de subfunciones para hacer el numero random
+*/
 
 .data
 seed: 		.word 	1
@@ -12,6 +17,7 @@ numeros:	.word 0,0,0,0,0,0
 .text
 .global myrand, mysrand, anadir, validar
 
+#Raul Jimenez modificaciones del original
 myrand:
 	ldr r1, =seed	@puntero a semilla
 	ldr r0, [r1]	@leer valor
@@ -24,12 +30,14 @@ myrand:
 	lsr r0, #17
 	mov pc, lr
 
+# Alejandra Gudiel
 mysrand:
 	ldr r1, =seed
 	str r0, [r1]
 	mov pc, lr
 
 
+# Raul Jimenez 
 anadir:
 	and r1,r1,#9
 	ldr r9, =cont
@@ -42,6 +50,7 @@ anadir:
 	bl printf
 	mov pc, lr
 	
+# Donaldo Garcia
 validar:
 	mov r10,#0 @contador posicion
 	mov r11,#0 @contador del ciclo
